@@ -1,0 +1,38 @@
+.rating,
+.star-btn {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 80px;
+    height: 16px;
+    overflow: hidden;
+    background: url(rating-star.png) no-repeat -80px 0;
+    zoom: 1;
+}
+.rating span,
+.star-btn .text {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+.rating.star_5 { background-position: 0 0; }
+.rating.star_4 { background-position: -16px 0; }
+.rating.star_3 { background-position: -32px 0; }
+.rating.star_2 { background-position: -48px 0; }
+.rating.star_1 { background-position: -64px 0; }
+
+
+.star-btn {
+    background: url(rating-star.png) no-repeat right top;
+}
+.star-btn .btn {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    zoom: 1;
+}

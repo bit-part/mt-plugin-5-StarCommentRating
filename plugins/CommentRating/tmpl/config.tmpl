@@ -1,0 +1,24 @@
+<fieldset>
+    <mtapp:setting
+        id="active"
+        label="<__trans phrase="active">">
+        <input type="checkbox" value="1" name="active" id="active"<tmpl_if name="active"> checked="checked"</tmpl_if> />
+    </mtapp:setting>
+    <mtapp:setting
+        id="decimal"
+        label="<__trans phrase="decimal">">
+        <input type="checkbox" value="1" name="decimal" id="decimal"<tmpl_if name="decimal"> checked="checked"</tmpl_if> />
+        <span><__trans phrase="display the first decimal place"></span>
+    </mtapp:setting>
+    <mtapp:setting
+        id="once_rating"
+        label="<__trans phrase="IP check">">
+        <input type="checkbox" value="1" name="once_rating" id="once_rating"<tmpl_if name="once_rating"> checked="checked"</tmpl_if> />
+        <span><__trans phrase="Not save repetition ip"></span>
+    </mtapp:setting>
+    <mtapp:setting
+        id="keys"
+        label="<__trans phrase="keys(separate space)">">
+        <textarea name="keys" id="keys" rows="5"><mt:var name="keys"></textarea>
+    </mtapp:setting>
+</fieldset>
