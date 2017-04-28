@@ -16,11 +16,15 @@
     top: -9999px;
     left: -9999px;
 }
-.rating.star_5 { background-position: 0 0; }
-.rating.star_4 { background-position: -16px 0; }
-.rating.star_3 { background-position: -32px 0; }
-.rating.star_2 { background-position: -48px 0; }
-.rating.star_1 { background-position: -64px 0; }
+.rating.star_5   { background-position: 0 0; }
+.rating.star_4_5 { background-position: 0 -16px; }
+.rating.star_4   { background-position: -16px 0; }
+.rating.star_3_5 { background-position: -16px -16px; }
+.rating.star_3   { background-position: -32px 0; }
+.rating.star_2_5 { background-position: -32px -16px; }
+.rating.star_2   { background-position: -48px 0; }
+.rating.star_1_5 { background-position: -48px -16px; }
+.rating.star_1   { background-position: -64px 0; }
 
 
 .star-btn {

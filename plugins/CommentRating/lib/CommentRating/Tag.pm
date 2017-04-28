@@ -78,7 +78,10 @@ sub handle_entryrating {
 sub handle_entryrating_star {
     my ( $ctx, $args ) = @_;
     my $value = &handle_entryrating( $ctx, $args ) || 0;
-    return '<span class="rating star_'.int($value).'" title="'.$value.' stars"><span>'.$value.' stars</span></span>';
+    my $value_class = '' . $value;
+    $value_class =~ s/\.[01234]//g;
+    $value_class =~ s/\.[56789]/_5/g;
+    return '<span class="rating star_'.$value_class.'" title="'.$value.' stars"><span>'.$value.' stars</span></span>';
 }
 
 sub handle_entryrating_count {
@@ -89,7 +92,7 @@ sub handle_entryrating_count {
         or return $ctx->_no_entry_error();
     my $entry_id = $entry->id;
     my $key = $args->{key};
-    
+
     my @ratings;
     if ($key) {
         @ratings = CommentRating::Object->load({ entry_id => $entry_id, key => $key });
