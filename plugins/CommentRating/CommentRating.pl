@@ -5,7 +5,7 @@ use MT::Plugin;
 use base qw(MT::Plugin);
 
 use vars qw($VERSION $SCHEMA_VERSION);
-$VERSION = '0.0.5';
+$VERSION = '0.1.0';
 $SCHEMA_VERSION = '0.02';
 
 use MT;
