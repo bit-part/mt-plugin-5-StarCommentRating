@@ -17,6 +17,8 @@ use vars qw( %Lexicon );
 # CMS.pm
     'Rating' => '評価',
     'It is the value that evaluated a entry with five phases.' => 'ブログ記事を５段階で評価した値です。',
+# Plugin.pm
+    'The comment rate have to be up to 5.' => '評価の値は 5 までの数値で指定してください。',
 );
 
 1;

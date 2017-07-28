@@ -122,9 +122,29 @@ sub cb_template_param_edit_comment {
         for my $rating (@ratings) {
             $value = $rating->value;
         }
-        $innerHTML .= $key . ' : ' . $value . ', ';
+        $innerHTML .= '<p>' . $key . ' : <input class="text num mt-edit-field comment-rating-value" id="comment-' . $key . '" type="text" name="' . $key . '" value="' . $value . '" /></p>';
     }
-    $innerHTML =~ s/(,\s)$//;
+    $innerHTML .= <<'EOD';
+    <script type="text/javascript">
+    jQuery(function(){
+        var commentValueCheck = function (){
+            var num = jQuery(this).val() * 1000;
+            if (num > 5000) {
+                alert('<__trans_section component="commentrating"><__trans phrase="The comment rate have to be up to 5."></__trans_section>');
+            }
+            return false;
+        };
+        jQuery('input.comment-rating-value')
+        .keydown(function(e){
+            var keycode = e.which || e.keyCode;
+            if (keycode === 13) {
+                return false;
+            }
+        })
+        .blur(commentValueCheck);
+    });
+    </script>
+EOD
     my $pointer_field = $tmpl->getElementById('ip');
     my $label = '<__trans_section component="commentrating"><__trans phrase="Rating"></__trans_section>';
     my $hint = '<__trans_section component="commentrating"><__trans phrase="It is the value that evaluated a entry with five phases."></__trans_section>';
