@@ -38,26 +38,31 @@ sub cb_comment_pre_save {
     my $active = select_config($conf, 'active');
     return unless $active;
     my $once_rating = select_config($conf, 'once_rating');
-    
-    my $app = MT->instance();
 
-    # Check IP address
     $obj->repetition(1);
-    my @ratings = CommentRating::Object->load({ entry_id => $entry_id });
-    for my $rating (@ratings) {
-        if ($ip eq $rating->ip) {
-            $obj->repetition(0);
-            $app->log('IP adress repetition');
-            last;
+
+    my $app = MT->instance();
+    my $q = $app->param;
+    my $save_from_cp = $q->param('save_from_cp');
+    if ($save_from_cp and $save_from_cp eq '$*^prTHx7W4%U3$nn4FgCrQdR^hTsC') {
+        $obj->repetition(1);
+    }
+    else {
+        # Check IP address
+        my @ratings = CommentRating::Object->load({ entry_id => $entry_id });
+        for my $rating (@ratings) {
+            if ($ip eq $rating->ip) {
+                $obj->repetition(0);
+                $app->log('IP adress repetition');
+                last;
+            }
         }
     }
-    
     return $obj;
 }
 
 sub save_comment_rating {
     my ($blog_id, $entry_id, $comment_id, $ip, $key, $value, $repetition) = @_;
-    
     my $obj = CommentRating::Object->new;
     $obj->blog_id($blog_id);
     $obj->entry_id($entry_id);
@@ -71,7 +76,6 @@ sub save_comment_rating {
 
 sub cb_comment_post_save {
     my ($cb, $obj, $original) = @_;
-    
     my $app = MT->instance();
 
     # Get value
@@ -125,6 +129,7 @@ sub cb_template_param_edit_comment {
         $innerHTML .= '<p>' . $key . ' : <input class="text num mt-edit-field comment-rating-value" id="comment-' . $key . '" type="text" name="' . $key . '" value="' . $value . '" /></p>';
     }
     $innerHTML .= <<'EOD';
+    <input type="hidden" name="save_from_cp" value="$*^prTHx7W4%U3$nn4FgCrQdR^hTsC" />
     <script type="text/javascript">
     jQuery(function(){
         var commentValueCheck = function (){
