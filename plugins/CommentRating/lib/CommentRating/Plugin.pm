@@ -71,7 +71,7 @@ sub save_comment_rating {
         $obj->value($value);
         $obj->save or die 'Saving a rate object has been failed.';
     }
-    else {
+    elsif ($value) {
         $obj = CommentRating::Object->new;
         $obj->blog_id($blog_id);
         $obj->entry_id($entry_id);
