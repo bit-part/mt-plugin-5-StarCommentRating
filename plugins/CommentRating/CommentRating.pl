@@ -5,7 +5,7 @@ use MT::Plugin;
 use base qw(MT::Plugin);
 
 use vars qw($VERSION $SCHEMA_VERSION);
-$VERSION = '0.2.1';
+$VERSION = '0.2.2';
 $SCHEMA_VERSION = '0.02';
 
 use MT;
@@ -32,6 +32,7 @@ my $plugin = MT::Plugin::CommentRating->new({
     ]),
     schema_version => $SCHEMA_VERSION,
 });
+
 MT->add_plugin($plugin);
 
 sub init_registry {

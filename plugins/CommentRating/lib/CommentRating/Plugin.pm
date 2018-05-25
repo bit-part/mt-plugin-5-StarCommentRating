@@ -63,15 +63,25 @@ sub cb_comment_pre_save {
 
 sub save_comment_rating {
     my ($blog_id, $entry_id, $comment_id, $ip, $key, $value, $repetition) = @_;
-    my $obj = CommentRating::Object->new;
-    $obj->blog_id($blog_id);
-    $obj->entry_id($entry_id);
-    $obj->comment_id($comment_id);
-    $obj->ip($ip);
-    $obj->key($key);
-    $obj->value($value);
-    $obj->repetition($repetition);
-    $obj->save or die 'Can not saved.';
+    my $obj = CommentRating::Object->load({ comment_id => $comment_id, key => $key }, { direction => 'descend'});
+    if ($obj) {
+        unless ($value) {
+            $obj->remove or die 'Removing a rate object failed.';
+        }
+        $obj->value($value);
+        $obj->save or die 'Saving a rate object has been failed.';
+    }
+    else {
+        $obj = CommentRating::Object->new;
+        $obj->blog_id($blog_id);
+        $obj->entry_id($entry_id);
+        $obj->comment_id($comment_id);
+        $obj->ip($ip);
+        $obj->key($key);
+        $obj->value($value);
+        $obj->repetition($repetition);
+        $obj->save or die 'Saving a rate object has been failed.';
+    }
 }
 
 sub cb_comment_post_save {
@@ -97,7 +107,7 @@ sub cb_comment_post_save {
     
         for my $key (@keys) {
             my $value = $app->param($key);
-            &save_comment_rating($blog_id, $entry_id, $comment_id, $ip, $key, $value, $repetition) if $value;
+            &save_comment_rating($blog_id, $entry_id, $comment_id, $ip, $key, $value, $repetition);
         }
     }
 }
