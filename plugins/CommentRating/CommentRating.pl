@@ -5,7 +5,7 @@ use MT::Plugin;
 use base qw(MT::Plugin);
 
 use vars qw($VERSION $SCHEMA_VERSION);
-$VERSION = '0.2.3';
+$VERSION = '0.2.4';
 $SCHEMA_VERSION = '0.02';
 
 use MT;
@@ -16,8 +16,8 @@ my $plugin = MT::Plugin::CommentRating->new({
     version => $VERSION,
     description => '<__trans phrase="Add five stars rating in the comments.">',
     author_name => 'Tomohiro Okuwaki',
-    author_link => 'http://www.tinybeans.net/blog/',
-    plugin_link => 'http://www.tinybeans.net/blog/download/mt-plugin/comment-rating.html',
+    author_link => 'https://tinybeans.net/',
+    plugin_link => 'https://tinybeans.net/mt-plugin/comment-rating',
     l10n_class => 'CommentRating::L10N',
     config_template => 'config.tmpl',
     settings => MT::PluginSettings->new([
