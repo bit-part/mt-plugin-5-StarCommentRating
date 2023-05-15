@@ -1,12 +1,11 @@
 $(function(){
-    $('span.star-btn span.btn').hover(
-        function(){
+    $('span.star-btn span.btn')
+        .on('mouseenter', function(){
             $(this).css('cursor','pointer');
-        },
-        function(){
+        })
+        .on('mouseleave', function(){
             $(this).css('cursor','default');
-        }
-    );
+        });
 
     $('span.star-btn').each(function(){
         var span = $(this);
@@ -15,26 +14,23 @@ $(function(){
             span.css('background-position', (-16 * (5 - rating)) + 'px 0');
         }
     });
-    
+
     $('span.star-btn span.btn').each(function(){
-        
+
         var span = $(this).parent('span');
         var input = span.next('input');
         var num = $(this).attr('title');
-        $(this).hover(
-            function(){
-                span.css('background-position', (-16 * (5 - num)) + 'px 0');
-            },
-            function(){
-                var rating = input.val();
-                if (rating) {
-                    span.css('background-position', (-16 * (5 - rating)) + 'px 0');
-                } else {
-                    span.css('background-position', 'right top');
-                }
+        $(this).on('mouseenter', function(){
+            span.css('background-position', (-16 * (5 - num)) + 'px 0');
+        }).on('mouseleave', function(){
+            var rating = input.val();
+            if (rating) {
+                span.css('background-position', (-16 * (5 - rating)) + 'px 0');
+            } else {
+                span.css('background-position', 'right top');
             }
-        );
-        $(this).click(function(e){
+        });
+        $(this).on('click', function(e){
             e.preventDefault();
             if (input.val() == num) {
                 input.val('');
